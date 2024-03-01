@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      image 'lalith425/lalith-java-mav:latest'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' 
     }
   }
