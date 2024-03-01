@@ -36,7 +36,6 @@ pipeline {
         echo DOCKER_IMAGE
       }
       steps {
-             echo "Building and pushing Docker image: ${DOCKER_IMAGE}"
         script {
             sh 'build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
