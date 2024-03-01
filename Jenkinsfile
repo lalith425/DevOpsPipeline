@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "lalith425/devopspipeline:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "lalith425/devopspipeline/devopspipeline:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('dockerCredentials')
       }
