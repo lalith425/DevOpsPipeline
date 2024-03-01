@@ -33,7 +33,6 @@ pipeline {
         DOCKER_IMAGE = "lalith425/devopspipeline:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('dockerCredentials')
-        echo DOCKER_IMAGE
       }
       steps {
         script {
