@@ -1,4 +1,3 @@
-# Use a base image with Java installed (e.g., OpenJDK 11)
 FROM openjdk:17
 
 # Set environment variables for Maven version and installation path
@@ -13,5 +12,3 @@ RUN mkdir -p $MAVEN_HOME \
 
 # Verify installation
 RUN mvn -version
-
-# Your application's Dockerfile commands follow...

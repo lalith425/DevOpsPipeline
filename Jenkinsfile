@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'lalith425/devopspipeline'
+      image 'lalith425/lalith-java-mav:latest'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' 
     }
   }
