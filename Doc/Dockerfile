@@ -1,49 +1,31 @@
-# First stage: Install Docker CLI
-FROM ubuntu:latest AS docker_installation
+# Use Ubuntu as the base image for wider package support
+FROM ubuntu:latest
+
+# Install OpenJDK-17, Maven, and necessary tools for Docker installation
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk maven curl gnupg-agent software-properties-common
+
+# Add Docker’s official GPG key
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+# Set up the Docker stable repository
+RUN add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 # Install Docker CLI
-RUN apt-get update && apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release \
-    software-properties-common
-
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 RUN apt-get update && apt-get install -y docker-ce-cli
 
-# Verify Docker CLI installation
+# Verify installations
+RUN java -version
+RUN mvn -version
 RUN docker --version
 
-# Second stage: Install Maven
-FROM openjdk:17 AS maven_installation
-
-# Set the Maven version
-ENV MAVEN_VERSION 3.8.4
+# Define environment variables for Java and Maven
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 ENV MAVEN_HOME /usr/share/maven
 
-# Install Maven
-RUN mkdir -p $MAVEN_HOME \
-  && curl -fsSL https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
-  | tar -xzC $MAVEN_HOME --strip-components=1 \
-  && ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn
+# Optionally: Set a working directory
+WORKDIR /app
 
-# Verify Maven installation
-# Final stage: Build your application
-FROM openjdk:17
-
-# Copy Maven from the Maven installation stage
-COPY --from=maven_installation /usr/share/maven /usr/share/maven
-
-# Copy Docker CLI from the Docker installation stage
-COPY --from=docker_installation /usr/bin/docker /usr/bin/docker
-
-# Add Maven to the PATH
-ENV PATH="/usr/share/maven/bin:${PATH}"
-
-# Verify Maven installation
-RUN mvn --version
-
-# Continue with your application build process
+# Optionally: Start a shell or another specific command by default
+CMD ["/bin/bash"]
