@@ -7,7 +7,7 @@ RUN mvn package -DskipTests
 
 
 
-FROM openjdk:11-jdk
+FROM openjdk:17-jdk
 RUN mkdir app
 COPY --from=build /app/target/*.jar app.jar
 CMD ["java","-jar","/app.jar"]
