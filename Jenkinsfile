@@ -36,8 +36,8 @@ pipeline {
         echo DOCKER_IMAGE
       }
       steps {
-        script {
              echo "Building and pushing Docker image: ${DOCKER_IMAGE}"
+        script {
             sh 'build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "dockerCredentials") {
