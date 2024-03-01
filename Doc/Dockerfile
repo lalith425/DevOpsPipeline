@@ -31,8 +31,6 @@ RUN mkdir -p $MAVEN_HOME \
   && ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn
 
 # Verify Maven installation
-RUN mvn --version
-
 # Final stage: Build your application
 FROM openjdk:17
 
@@ -41,5 +39,11 @@ COPY --from=maven_installation /usr/share/maven /usr/share/maven
 
 # Copy Docker CLI from the Docker installation stage
 COPY --from=docker_installation /usr/bin/docker /usr/bin/docker
+
+# Add Maven to the PATH
+ENV PATH="/usr/share/maven/bin:${PATH}"
+
+# Verify Maven installation
+RUN mvn --version
 
 # Continue with your application build process
