@@ -8,6 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
+        sh 'checkout scm'
         sh 'echo passed'
        //no need since jenkins file present in same directory so it will automatically checakou tthe repo
       }
