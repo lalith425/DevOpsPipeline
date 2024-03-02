@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Install OpenJDK-17, Maven, and necessary tools for Docker installation
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk maven curl gnupg-agent software-properties-common
+    apt-get install -y openjdk-17-jdk maven git curl gnupg-agent software-properties-common
 
 # Add Docker’s official GPG key
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y docker-ce-cli
 # Verify installations
 RUN java -version
 RUN mvn -version
+RUN git --version
 RUN docker --version
 
 # Define environment variables for Java and Maven
