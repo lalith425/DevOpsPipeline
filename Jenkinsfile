@@ -71,12 +71,12 @@ pipeline {
         }
         }
     }
-  post {
+  }
+    post {
         always {
             script {
                 sh 'docker system prune -af'
             }
         }
     }
-  }
 }
