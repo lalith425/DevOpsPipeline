@@ -8,9 +8,6 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-       checkout scm
-          sh 'pwd'
-          sh 'ls -al'
         sh 'echo passed'
        //no need since jenkins file present in same directory so it will automatically checakou tthe repo
       }
