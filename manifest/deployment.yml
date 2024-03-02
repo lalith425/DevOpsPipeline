@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: devopspipeline
-        image: lalith425/devopspipeline:replaceImageTag
+        image: lalith425/devopspipeline:71
         ports:
         - containerPort: 8080
