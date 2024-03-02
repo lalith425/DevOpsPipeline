@@ -9,6 +9,8 @@ pipeline {
     stage('Checkout') {
       steps {
        checkout scm
+          sh 'pwd'
+          sh 'ls -al'
         sh 'echo passed'
        //no need since jenkins file present in same directory so it will automatically checakou tthe repo
       }
@@ -52,6 +54,9 @@ pipeline {
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+              script{
+                 sh 'pwd'
+                  sh 'ls -al'
                 sh '''
                     git config user.email "lalithkumarrajendran08@gmail.com"
                     git config user.name "lalith425"
@@ -61,6 +66,7 @@ pipeline {
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 '''
+            }
             }
         }
     }
