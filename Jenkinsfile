@@ -54,6 +54,7 @@ pipeline {
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+              dir("${WORKSPACE}") {
               script{
                  sh 'pwd'
                   sh 'ls -al'
@@ -68,6 +69,7 @@ pipeline {
                 '''
             }
             }
+        }
         }
     }
   }
