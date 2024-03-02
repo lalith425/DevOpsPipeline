@@ -60,8 +60,6 @@ pipeline {
                   sh 'ls -al'
                 sh '''
                     git init
-                    git config user.email "lalithkumarrajendran08@gmail.com"
-                    git config user.name "lalith425"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifest/deployment.yml
                     git add manifests/deployment.yml
