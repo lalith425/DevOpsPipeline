@@ -18,4 +18,4 @@ spec:
       - name: devopspipeline
         image: lalith425/devopspipeline:76
         ports:
-        - containerPort: 8080
+        - containerPort: 8080 
